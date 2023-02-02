@@ -54,45 +54,30 @@
 //8 4 2 4
 //17 -> такого числа в массиве нет
 
-int GetNumberFromPositionInArray(int[,] someIntArray, int elementPosition)
+Console.Write("Введите строку: ");
+int pos1 = Convert.ToInt32(Console.ReadLine()) - 1;
+Console.Write("Введите столбец: ");
+int pos2 = Convert.ToInt32(Console.ReadLine()) - 1;
+int n = 5; 
+int m = 7; 
+Random random = new Random();
+int[,] arr = new int[n, m];
+Console.WriteLine("Исходный массив: ");
+for (int i = 0; i < arr.GetLength(0); i++)
 {
-    int position = elementPosition;
-
-    if (elementPosition > 0 && elementPosition <= someIntArray.Length)
-    {
-        int rowLength = someIntArray.GetLength(1);
-
-        int i = 0, j = 0;
-        // строка (row ряд) в котором находится нужный элемент
-        while (elementPosition > rowLength)
-        {
-            elementPosition -= rowLength;
-            i++;
-        }
-        // индекс элемента в конкретном ряду (колонка)
-        j = rowLength - ( rowLength - elementPosition ) - 1;
-
-        return someIntArray[i, j];
-    }
-    // нужно вернуть число!
-    // если ни чего не получилось,
-    // то возвращаем число,
-    // которого точно не может быть в массиве.
-    // например "-1" для массива положительных чисел.
-
-    return -1;
+    for (int j = 0; j < arr.GetLength(1); j++)
+{
+    arr[i, j] = random.Next(10, 99);
+Console.Write("{0} ", arr[i, j]);
 }
-
-
-int[,] myIntArray = Create2DimArray(hight:3, length: 5, min: 0, max:10);
-Print2DArray(myIntArray);
-
-
-int position = new Random().Next(0, myIntArray.Length);
-int number = GetNumberFromPositionInArray(myIntArray, position);
-
-String str50 = number >= 0 ?
-    $"На {position} позиции в массиве находится число = {number}" :
-    $"позиция {position} за пределами массива";
-
-Console.WriteLine(str50);
+Console.WriteLine();
+}
+    if (pos1 < 0 | pos1 > arr.GetLength(0) - 1 | pos2 < 0 | pos2 > arr.GetLength(1) - 1)
+{
+Console.WriteLine("Элемент не существует  ");
+}
+    else
+{
+    Console.WriteLine("Значение элемента массива = {0}", arr[pos1, pos2]);
+}
+Console.ReadLine();
