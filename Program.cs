@@ -102,7 +102,7 @@ for (int i = 0; i < arr.GetLength(0); i++)
     }
     Console.WriteLine();
 }
-Console.WriteLine("---------------------------");
+Console.WriteLine("-------------");
 Console.WriteLine(arr.GetLength(0));
 for (int j = 0; j < arr.GetLength(1); j++)
 {
