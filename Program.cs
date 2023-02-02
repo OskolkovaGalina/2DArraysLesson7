@@ -12,7 +12,7 @@
 //PrintArray2D(numbers);
 
 // Заполнение массива рандомными вещественными числами
-/void FillArray2D(double[,] array)
+//void FillArray2D(double[,] array)
 //{
   //  for (int i = 0; i < array.GetLength(0); i++)
     //{
