@@ -54,45 +54,45 @@
 //8 4 2 4
 //17 -> такого числа в массиве нет
 
-int rows = ReadInt("Введите индекс строки: ");
-int colums = ReadInt("Введите индекс столбца: ");
-int[,] numbers = new int[6, 8];
-FillArray2D(numbers);
-PrintArray2D(numbers);
-
-if (rows < numbers.GetLength(0) && colums < numbers.GetLength(1)) Console.WriteLine(numbers[rows, colums]);
-else Console.WriteLine($"{rows}{colums} -> такого числа в массиве нет");
-
-
-// Заполнение массива рандомными числами от 1 до 9
-void FillArray2D(int[,] array)
+int GetNumberFromPositionInArray(int[,] someIntArray, int elementPosition)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
+    int position = elementPosition;
+
+    if (elementPosition > 0 && elementPosition <= someIntArray.Length)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
+        int rowLength = someIntArray.GetLength(1);
+
+        int i = 0, j = 0;
+        // строка (row ряд) в котором находится нужный элемент
+        while (elementPosition > rowLength)
         {
-            array[i, j] = new Random().Next(1, 10);
+            elementPosition -= rowLength;
+            i++;
         }
+        // индекс элемента в конкретном ряду (колонка)
+        j = rowLength - ( rowLength - elementPosition ) - 1;
+
+        return someIntArray[i, j];
     }
+    // нужно вернуть число!
+    // если ни чего не получилось,
+    // то возвращаем число,
+    // которого точно не может быть в массиве.
+    // например "-1" для массива положительных чисел.
+
+    return -1;
 }
 
-//  Функция вывода массива в терминал
-void PrintArray2D(int[,] array)
-{
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write(array[i, j] + " ");
-        }
-        Console.WriteLine();
-    }
-    Console.WriteLine();
-}
 
-// Функция ввода 
-int ReadInt(string message)
-{
-    Console.Write(message);
-    return Convert.ToInt32(Console.ReadLine());
-}
+int[,] myIntArray = Create2DimArray(hight:3, length: 5, min: 0, max:10);
+Print2DArray(myIntArray);
+
+
+int position = new Random().Next(0, myIntArray.Length);
+int number = GetNumberFromPositionInArray(myIntArray, position);
+
+String str50 = number >= 0 ?
+    $"На {position} позиции в массиве находится число = {number}" :
+    $"позиция {position} за пределами массива";
+
+Console.WriteLine(str50);
